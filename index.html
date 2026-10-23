@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ben's Day at the Park - Grammar Storybook</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Nunito", Arial, sans-serif;
+    background: linear-gradient(135deg, #fff9e9, #eef9ff);
+    color: #34374b;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    height: 72px;
+    background: rgba(255,255,255,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.logo-icon {
+    font-size: 28px;
+    margin-right: 7px;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.page-counter {
+    background: #f2f4ff;
+    padding: 9px 16px;
+    border-radius: 20px;
+    font-weight: 800;
+    color: #626b91;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main-container {
+    width: 94%;
+    max-width: 900px;
+    margin: 28px auto 60px;
+}
+
+.book-title {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.book-title h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.book-title p {
+    margin: 6px 0 0;
+    color: #7a7e91;
+    font-size: 16px;
+}
+
+/* =========================
+   BOOK
+========================= */
+
+.book {
+    background: white;
+    border-radius: 28px;
+    padding: 22px;
+    box-shadow:
+        0 18px 45px rgba(60,70,100,0.13),
+        0 3px 0 rgba(255,255,255,0.7) inset;
+    position: relative;
+}
+
+.book::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    width: 88%;
+    height: 14px;
+    transform: translateX(-50%);
+    background: #e6dfcf;
+    border-radius: 0 0 20px 20px;
+    z-index: -1;
+}
+
+.picture-frame {
+    width: 100%;
+    height: 500px;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #dff4ff;
+    position: relative;
+}
+
+.picture-frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* =========================
+   SENTENCE
+========================= */
+
+.sentence-area {
+    min-height: 118px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 20px 8px;
+}
+
+.sentence {
+    margin: 0;
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.5;
+    font-weight: 800;
+    cursor: pointer;
+    padding: 12px 22px;
+    border-radius: 18px;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.sentence:hover {
+    background: #fff8d7;
+    transform: scale(1.015);
+}
+
+.sentence:active {
+    transform: scale(0.98);
+}
+
+.grammar {
+    color: #e66d5b;
+    background: #fff0a8;
+    padding: 1px 7px;
+    border-radius: 8px;
+}
+
+.speaker-hint {
+    text-align: center;
+    color: #989cac;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.speaker-hint span {
+    background: #f5f6fa;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+/* speaking animation */
+
+.speaking {
+    background: #fff3bd !important;
+}
+
+.speaking::before {
+    content: "🔊 ";
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-top: 18px;
+    gap: 15px;
+}
+
+.nav-btn {
+    border: none;
+    padding: 13px 23px;
+    border-radius: 15px;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.back-btn {
+    justify-self: start;
+    background: #eef0f7;
+    color: #606477;
+}
+
+.next-btn {
+    justify-self: end;
+    background: #6473e8;
+    color: white;
+    box-shadow: 0 4px 0 #4857bd;
+}
+
+.nav-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.nav-btn:active:not(:disabled) {
+    transform: translateY(2px);
+}
+
+.nav-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.dots {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    background: #d9dce7;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.dot.active {
+    width: 24px;
+    border-radius: 8px;
+    background: #7a87eb;
+}
+
+/* =========================
+   PAGE TRANSITION
+========================= */
+
+.page-content {
+    animation: pageIn .35s ease;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================
+   GRAMMAR PAGE
+========================= */
+
+.grammar-page {
+    display: none;
+    background: white;
+    border-radius: 28px;
+    padding: 38px;
+    box-shadow: 0 15px 40px rgba(60,70,100,.12);
+}
+
+.grammar-page.show {
+    display: block;
+}
+
+.label {
+    display: inline-block;
+    background: #fff0b8;
+    padding: 7px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.grammar-page h2 {
+    font-size: 31px;
+    margin: 4px 0 10px;
+}
+
+.intro-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: #65697a;
+}
+
+.rule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 25px 0;
+}
+
+.rule-card {
+    border-radius: 22px;
+    padding: 25px;
+    text-align: center;
+}
+
+.was-card {
+    background: #fff1df;
+}
+
+.were-card {
+    background: #eaf2ff;
+}
+
+.rule-word {
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.was-word {
+    color: #e26752;
+}
+
+.were-word {
+    color: #5570d9;
+}
+
+.rule-subject {
+    font-size: 21px;
+    font-weight: 900;
+    margin: 10px 0;
+}
+
+.rule-example {
+    background: white;
+    border-radius: 13px;
+    padding: 12px;
+    margin-top: 14px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.memory-box {
+    background: #f7f7fb;
+    border-radius: 18px;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.start-quiz {
+    display: block;
+    margin: 25px auto 0;
+    border: none;
+    background: #6373e8;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz-page {
+    display: none;
+    background: white;
+    border-radius: 28px;
+    padding: 38px;
+    box-shadow: 0 15px 40px rgba(60,70,100,.12);
+    text-align: center;
+}
+
+.quiz-page.show {
+    display: block;
+}
+
+.quiz-page h2 {
+    font-size: 30px;
+}
+
+.quiz-number {
+    color: #888da0;
+    font-weight: 800;
+}
+
+.quiz-question {
+    background: #f7f8fd;
+    border-radius: 20px;
+    padding: 28px 15px;
+    font-size: 26px;
+    font-weight: 900;
+    margin: 20px 0;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    max-width: 550px;
+    margin: auto;
+}
+
+.quiz-btn {
+    border: 3px solid #e2e5f0;
+    background: white;
+    border-radius: 17px;
+    padding: 16px;
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.quiz-btn:hover {
+    border-color: #7886e8;
+}
+
+.quiz-btn.correct {
+    background: #dff7e6;
+    border-color: #65be7c;
+}
+
+.quiz-btn.wrong {
+    background: #ffe2df;
+    border-color: #e77669;
+}
+
+.feedback {
+    min-height: 35px;
+    margin-top: 20px;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+/* =========================
+   FINISH
+========================= */
+
+.finish {
+    display: none;
+    text-align: center;
+}
+
+.finish.show {
+    display: block;
+}
+
+.trophy {
+    font-size: 85px;
+}
+
+.finish h2 {
+    font-size: 34px;
+}
+
+.restart {
+    border: none;
+    background: #6373e8;
+    color: white;
+    padding: 14px 25px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px) {
+
+    header {
+        padding: 0 15px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .picture-frame {
+        height: 380px;
+    }
+
+    .sentence {
+        font-size: 22px;
+    }
+
+    .rule-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <span class="logo-icon">📖</span>
+        Grammar Storybook
+    </div>
+
+    <div class="header-right">
+        <div class="page-counter" id="pageCounter">
+            Page 1 / 7
+        </div>
+    </div>
+</header>
+
+
+<div class="main-container">
+
+    <!-- =========================
+         STORYBOOK
+    ========================== -->
+
+    <div id="storybook">
+
+        <div class="book-title">
+            <h1>🐻 Ben's Day at the Park</h1>
+            <p>Click the sentence to hear it!</p>
+        </div>
+
+        <div class="book">
+
+            <div id="pageContent" class="page-content">
+
+                <div class="picture-frame" id="pictureFrame">
+                </div>
+
+                <div class="sentence-area">
+                    <p class="sentence" id="sentence" onclick="speakSentence()">
+                    </p>
+                </div>
+
+                <div class="speaker-hint">
+                    <span>🔊 Click the sentence to listen</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="navigation">
+
+            <button
+                class="nav-btn back-btn"
+                id="backButton"
+                onclick="previousPage()">
+                ← Back
+            </button>
+
+            <div class="dots" id="dots"></div>
+
+            <button
+                class="nav-btn next-btn"
+                id="nextButton"
+                onclick="nextPage()">
+                Next →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         GRAMMAR LESSON
+    ========================== -->
+
+    <div class="grammar-page" id="grammarPage">
+
+        <div class="label">GRAMMAR TIME ⭐</div>
+
+        <h2>Did you notice these words?</h2>
+
+        <p class="intro-text">
+            Our story used <strong>was</strong> and
+            <strong>were</strong> to talk about things
+            that happened in the past.
+        </p>
+
+        <div class="rule-grid">
+
+            <div class="rule-card was-card">
+
+                <div class="rule-word was-word">
+                    WAS
+                </div>
+
+                <div class="rule-subject">
+                    I · He · She · It
+                </div>
+
+                <p>
+                    Use <strong>was</strong> with one
+                    person or thing.
+                </p>
+
+                <div class="rule-example">
+                    🐻 Ben <strong>was</strong> happy.
+                </div>
+
+            </div>
+
+
+            <div class="rule-card were-card">
+
+                <div class="rule-word were-word">
+                    WERE
+                </div>
+
+                <div class="rule-subject">
+                    You · We · They
+                </div>
+
+                <p>
+                    Use <strong>were</strong> with
+                    "we," "you," "they," and plural nouns.
+                </p>
+
+                <div class="rule-example">
+                    🐦 The birds <strong>were</strong> in the trees.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="memory-box">
+
+            💡 <strong>Think about time!</strong>
+
+            <br><br>
+
+            ☀️ <strong>Today:</strong>
+            Ben <strong>is</strong> at the park.
+
+            <br>
+
+            🌙 <strong>Yesterday:</strong>
+            Ben <strong>was</strong> at the park.
+
+            <br><br>
+
+            ☀️ <strong>Today:</strong>
+            They <strong>are</strong> happy.
+
+            <br>
+
+            🌙 <strong>Yesterday:</strong>
+            They <strong>were</strong> happy.
+
+        </div>
+
+        <button class="start-quiz" onclick="startQuiz()">
+            Let's Practice! 🎮
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         QUIZ
+    ========================== -->
+
+    <div class="quiz-page" id="quizPage">
+
+        <div id="quizContent">
+
+            <div class="label">
+                MINI GAME 🎯
+            </div>
+
+            <h2>Was or Were?</h2>
+
+            <div class="quiz-number" id="quizNumber"></div>
+
+            <div class="quiz-question" id="quizQuestion"></div>
+
+            <div class="quiz-options">
+
+                <button
+                    class="quiz-btn"
+                    onclick="answerQuiz('was',this)">
+                    was
+                </button>
+
+                <button
+                    class="quiz-btn"
+                    onclick="answerQuiz('were',this)">
+                    were
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+
+        </div>
+
+
+        <div class="finish" id="finish">
+
+            <div class="trophy">
+                🏆
+            </div>
+
+            <h2>Great Reading!</h2>
+
+            <p style="font-size:20px;">
+                You finished the story and learned
+                <strong>was & were!</strong>
+            </p>
+
+            <p style="font-size:35px;">
+                ⭐ ⭐ ⭐
+            </p>
+
+            <button class="restart" onclick="restartBook()">
+                Read Again 📖
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   STORY DATA
+========================================================= */
+
+const pages = [
+
+{
+sentence:
+"Yesterday, Ben was at the park.",
+
+html:
+`Yesterday, Ben <span class="grammar">was</span> at the park.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<!-- SKY -->
+<rect width="800" height="500" fill="#bce9ff"/>
+
+<!-- SUN -->
+<circle cx="690" cy="80" r="48" fill="#FFD85B"/>
+
+<!-- CLOUDS -->
+<g fill="white" opacity=".95">
+<circle cx="120" cy="90" r="30"/>
+<circle cx="155" cy="85" r="40"/>
+<circle cx="195" cy="95" r="28"/>
+
+<circle cx="470" cy="65" r="25"/>
+<circle cx="500" cy="55" r="35"/>
+<circle cx="535" cy="67" r="25"/>
+</g>
+
+<!-- GRASS -->
+<path d="M0 330 Q150 300 300 335 T600 330 T800 325 L800 500 L0 500Z"
+fill="#9DDB7C"/>
+
+<!-- PATH -->
+<path d="M330 500 Q390 400 440 330 L540 330 Q470 420 460 500Z"
+fill="#E8D1A6"/>
+
+<!-- TREE -->
+<rect x="105" y="220" width="42" height="145" rx="10" fill="#8A5B3D"/>
+
+<circle cx="125" cy="185" r="80" fill="#68B85C"/>
+<circle cx="75" cy="215" r="52" fill="#75C668"/>
+<circle cx="175" cy="215" r="55" fill="#75C668"/>
+
+<!-- BEN -->
+<g transform="translate(520 240)">
+
+<!-- ears -->
+<circle cx="35" cy="35" r="27" fill="#9A663E"/>
+<circle cx="145" cy="35" r="27" fill="#9A663E"/>
+
+<circle cx="35" cy="35" r="14" fill="#C99368"/>
+<circle cx="145" cy="35" r="14" fill="#C99368"/>
+
+<!-- head -->
+<circle cx="90" cy="90" r="75" fill="#A96E45"/>
+
+<!-- muzzle -->
+<ellipse cx="90" cy="112" rx="42" ry="32" fill="#D6A77D"/>
+
+<!-- eyes -->
+<circle cx="65" cy="75" r="7" fill="#2F2A27"/>
+<circle cx="115" cy="75" r="7" fill="#2F2A27"/>
+
+<!-- nose -->
+<ellipse cx="90" cy="101" rx="11" ry="8" fill="#3A2A24"/>
+
+<!-- smile -->
+<path d="M72 118 Q90 135 108 118"
+stroke="#3A2A24"
+stroke-width="5"
+fill="none"
+stroke-linecap="round"/>
+
+<!-- body -->
+<ellipse cx="90" cy="210" rx="70" ry="90" fill="#A96E45"/>
+
+<!-- arms -->
+<ellipse cx="25" cy="195" rx="25" ry="70"
+fill="#A96E45"
+transform="rotate(20 25 195)"/>
+
+<ellipse cx="155" cy="195" rx="25" ry="70"
+fill="#A96E45"
+transform="rotate(-20 155 195)"/>
+
+</g>
+
+<!-- FLOWERS -->
+<g>
+<circle cx="230" cy="395" r="7" fill="#ff718a"/>
+<circle cx="250" cy="420" r="7" fill="#8f72e8"/>
+<circle cx="670" cy="390" r="7" fill="#ff718a"/>
+<circle cx="710" cy="430" r="7" fill="#fff"/>
+</g>
+
+</svg>
+`
+},
+
+
+{
+sentence:
+"The sun was bright.",
+
+html:
+`The sun <span class="grammar">was</span> bright.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<rect width="800" height="500" fill="#9EDFFF"/>
+
+<!-- SUN RAYS -->
+<g stroke="#FFD64F" stroke-width="16" stroke-linecap="round">
+
+<line x1="400" y1="40" x2="400" y2="95"/>
+<line x1="400" y1="305" x2="400" y2="365"/>
+
+<line x1="245" y1="200" x2="190" y2="200"/>
+<line x1="610" y1="200" x2="555" y2="200"/>
+
+<line x1="290" y1="90" x2="250" y2="50"/>
+<line x1="510" y1="310" x2="550" y2="350"/>
+
+<line x1="510" y1="90" x2="550" y2="50"/>
+<line x1="290" y1="310" x2="250" y2="350"/>
+
+</g>
+
+<!-- SUN -->
+<circle cx="400" cy="200" r="115" fill="#FFD95A"/>
+
+<!-- FACE -->
+<circle cx="365" cy="180" r="9" fill="#5D512B"/>
+<circle cx="435" cy="180" r="9" fill="#5D512B"/>
+
+<path d="M350 220 Q400 265 450 220"
+stroke="#5D512B"
+stroke-width="8"
+fill="none"
+stroke-linecap="round"/>
+
+<!-- CLOUDS -->
+<g fill="white">
+<circle cx="110" cy="380" r="35"/>
+<circle cx="150" cy="365" r="50"/>
+<circle cx="195" cy="385" r="35"/>
+
+<circle cx="620" cy="400" r="35"/>
+<circle cx="665" cy="380" r="52"/>
+<circle cx="715" cy="400" r="35"/>
+</g>
+
+</svg>
+`
+},
+
+
+{
+sentence:
+"The birds were in the trees.",
+
+html:
+`The birds <span class="grammar">were</span> in the trees.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<rect width="800" height="500" fill="#C6ECFF"/>
+
+<!-- GRASS -->
+<rect y="390" width="800" height="110" fill="#A7DB7D"/>
+
+<!-- TREES -->
+
+<g transform="translate(80 70)">
+<rect x="100" y="200" width="48" height="220" rx="10" fill="#8B5B3B"/>
+<circle cx="125" cy="170" r="110" fill="#63B75C"/>
+<circle cx="60" cy="210" r="70" fill="#70C365"/>
+<circle cx="195" cy="210" r="75" fill="#70C365"/>
+</g>
+
+<g transform="translate(470 100)">
+<rect x="100" y="200" width="45" height="200" rx="10" fill="#8B5B3B"/>
+<circle cx="125" cy="170" r="100" fill="#5CAF55"/>
+<circle cx="65" cy="210" r="65" fill="#70C365"/>
+<circle cx="185" cy="210" r="70" fill="#70C365"/>
+</g>
+
+<!-- BIRDS -->
+
+<g transform="translate(180 170)">
+<ellipse cx="0" cy="0" rx="32" ry="25" fill="#FF9D6C"/>
+<circle cx="25" cy="-13" r="19" fill="#FF9D6C"/>
+<circle cx="31" cy="-17" r="4" fill="#333"/>
+<polygon points="43,-12 62,-5 43,1" fill="#F6D45E"/>
+<path d="M-5 0 Q-35 -35 -45 0" fill="#E9845C"/>
+</g>
+
+<g transform="translate(320 220)">
+<ellipse cx="0" cy="0" rx="32" ry="25" fill="#72A8E8"/>
+<circle cx="25" cy="-13" r="19" fill="#72A8E8"/>
+<circle cx="31" cy="-17" r="4" fill="#333"/>
+<polygon points="43,-12 62,-5 43,1" fill="#F6D45E"/>
+<path d="M-5 0 Q-35 -35 -45 0" fill="#5A8CC9"/>
+</g>
+
+<g transform="translate(610 185)">
+<ellipse cx="0" cy="0" rx="32" ry="25" fill="#F4C95D"/>
+<circle cx="25" cy="-13" r="19" fill="#F4C95D"/>
+<circle cx="31" cy="-17" r="4" fill="#333"/>
+<polygon points="43,-12 62,-5 43,1" fill="#EF8C55"/>
+<path d="M-5 0 Q-35 -35 -45 0" fill="#E3AE3D"/>
+</g>
+
+</svg>
+`
+},
+
+
+{
+sentence:
+"Ben's friends were there too.",
+
+html:
+`Ben's friends <span class="grammar">were</span> there too.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<rect width="800" height="500" fill="#BDE8FF"/>
+
+<!-- grass -->
+<path d="M0 340 Q180 310 360 345 T800 335 L800 500 L0 500Z"
+fill="#9DDA7A"/>
+
+<!-- clouds -->
+<g fill="white">
+<circle cx="130" cy="90" r="30"/>
+<circle cx="170" cy="80" r="42"/>
+<circle cx="215" cy="95" r="30"/>
+</g>
+
+<!-- BEN -->
+<g transform="translate(110 210)">
+<circle cx="80" cy="75" r="62" fill="#A96E45"/>
+<circle cx="30" cy="35" r="23" fill="#A96E45"/>
+<circle cx="130" cy="35" r="23" fill="#A96E45"/>
+<ellipse cx="80" cy="180" rx="60" ry="75" fill="#A96E45"/>
+<circle cx="58" cy="65" r="6" fill="#333"/>
+<circle cx="102" cy="65" r="6" fill="#333"/>
+<ellipse cx="80" cy="92" rx="32" ry="24" fill="#D4A177"/>
+<circle cx="80" cy="87" r="7" fill="#333"/>
+<path d="M65 100 Q80 115 95 100" stroke="#333" stroke-width="4" fill="none"/>
+</g>
+
+<!-- RABBIT -->
+<g transform="translate(330 205)">
+<ellipse cx="60" cy="25" rx="18" ry="65" fill="#F1F0ED"/>
+<ellipse cx="105" cy="25" rx="18" ry="65" fill="#F1F0ED"/>
+<circle cx="82" cy="100" r="65" fill="#F1F0ED"/>
+<ellipse cx="82" cy="205" rx="58" ry="75" fill="#F1F0ED"/>
+<circle cx="60" cy="90" r="6" fill="#333"/>
+<circle cx="104" cy="90" r="6" fill="#333"/>
+<circle cx="82" cy="110" r="7" fill="#E98B91"/>
+<path d="M68 120 Q82 134 96 120" stroke="#555" stroke-width="4" fill="none"/>
+</g>
+
+<!-- FOX -->
+<g transform="translate(560 215)">
+<polygon points="35,50 50,0 80,55" fill="#E9814F"/>
+<polygon points="125,50 110,0 80,55" fill="#E9814F"/>
+<circle cx="80" cy="95" r="62" fill="#E9814F"/>
+<ellipse cx="80" cy="200" rx="58" ry="78" fill="#E9814F"/>
+<ellipse cx="80" cy="120" rx="35" ry="28" fill="#FFF1DF"/>
+<circle cx="58" cy="88" r="6" fill="#333"/>
+<circle cx="102" cy="88" r="6" fill="#333"/>
+<circle cx="80" cy="110" r="7" fill="#333"/>
+<path d="M66 120 Q80 134 94 120" stroke="#333" stroke-width="4" fill="none"/>
+</g>
+
+<!-- flowers -->
+<circle cx="270" cy="420" r="8" fill="#FF7D91"/>
+<circle cx="520" cy="440" r="8" fill="#9177DF"/>
+<circle cx="720" cy="400" r="8" fill="#FFD65A"/>
+
+</svg>
+`
+},
+
+
+{
+sentence:
+"They were very excited.",
+
+html:
+`They <span class="grammar">were</span> very excited.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<rect width="800" height="500" fill="#D8F2FF"/>
+
+<circle cx="700" cy="75" r="45" fill="#FFD75A"/>
+
+<rect y="350" width="800" height="150" fill="#A4DB7B"/>
+
+<!-- BALL -->
+<circle cx="400" cy="320" r="50" fill="#FFCC55"/>
+<path d="M355 300 Q400 330 445 300" stroke="#E38D55" stroke-width="8" fill="none"/>
+<path d="M400 270 L400 370" stroke="#E38D55" stroke-width="8"/>
+
+<!-- rabbit jumping -->
+<g transform="translate(170 150) rotate(-7)">
+<ellipse cx="60" cy="10" rx="15" ry="55" fill="#F4F3F0"/>
+<ellipse cx="100" cy="10" rx="15" ry="55" fill="#F4F3F0"/>
+<circle cx="80" cy="80" r="55" fill="#F4F3F0"/>
+<ellipse cx="80" cy="165" rx="50" ry="65" fill="#F4F3F0"/>
+<circle cx="60" cy="72" r="6"/>
+<circle cx="100" cy="72" r="6"/>
+<path d="M58 100 Q80 125 102 100" stroke="#555" stroke-width="5" fill="none"/>
+</g>
+
+<!-- fox -->
+<g transform="translate(500 160) rotate(6)">
+<polygon points="35,55 45,5 80,60" fill="#E98550"/>
+<polygon points="125,55 115,5 80,60" fill="#E98550"/>
+<circle cx="80" cy="95" r="58" fill="#E98550"/>
+<ellipse cx="80" cy="185" rx="53" ry="68" fill="#E98550"/>
+<circle cx="60" cy="87" r="6"/>
+<circle cx="100" cy="87" r="6"/>
+<ellipse cx="80" cy="110" rx="30" ry="22" fill="#FFF1E1"/>
+<path d="M60 115 Q80 140 100 115" stroke="#444" stroke-width="5" fill="none"/>
+</g>
+
+<!-- excitement marks -->
+<g stroke="#F3A33A" stroke-width="8" stroke-linecap="round">
+<line x1="130" y1="150" x2="105" y2="120"/>
+<line x1="150" y1="125" x2="140" y2="85"/>
+<line x1="650" y1="145" x2="680" y2="110"/>
+<line x1="625" y1="125" x2="635" y2="85"/>
+</g>
+
+</svg>
+`
+},
+
+
+{
+sentence:
+"Ben was happy.",
+
+html:
+`Ben <span class="grammar">was</span> happy.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<rect width="800" height="500" fill="#C8EDFF"/>
+
+<!-- background -->
+<circle cx="680" cy="80" r="45" fill="#FFD85A"/>
+
+<path d="M0 370 Q200 320 400 365 T800 350 L800 500 L0 500Z"
+fill="#9CDB78"/>
+
+<!-- flowers -->
+<g>
+<circle cx="100" cy="405" r="9" fill="#FF7D91"/>
+<circle cx="140" cy="440" r="9" fill="#8D78E0"/>
+<circle cx="650" cy="410" r="9" fill="#FF7D91"/>
+<circle cx="700" cy="445" r="9" fill="#FFD65A"/>
+</g>
+
+<!-- BIG BEN -->
+
+<g transform="translate(280 85)">
+
+<circle cx="45" cy="60" r="40" fill="#A86C44"/>
+<circle cx="195" cy="60" r="40" fill="#A86C44"/>
+
+<circle cx="45" cy="60" r="22" fill="#CF9B72"/>
+<circle cx="195" cy="60" r="22" fill="#CF9B72"/>
+
+<circle cx="120" cy="135" r="105" fill="#A86C44"/>
+
+<!-- eyes happy -->
+<path d="M65 120 Q85 100 105 120"
+stroke="#352923"
+stroke-width="8"
+fill="none"
+stroke-linecap="round"/>
+
+<path d="M135 120 Q155 100 175 120"
+stroke="#352923"
+stroke-width="8"
+fill="none"
+stroke-linecap="round"/>
+
+<!-- muzzle -->
+<ellipse cx="120" cy="165" rx="58" ry="45" fill="#D7A67D"/>
+
+<ellipse cx="120" cy="150" rx="14" ry="10" fill="#352923"/>
+
+<!-- huge smile -->
+<path d="M80 170 Q120 215 160 170"
+stroke="#352923"
+stroke-width="8"
+fill="none"
+stroke-linecap="round"/>
+
+<!-- body -->
+<ellipse cx="120" cy="330" rx="100" ry="120" fill="#A86C44"/>
+
+<!-- arms -->
+<ellipse cx="20" cy="300" rx="32" ry="95"
+fill="#A86C44"
+transform="rotate(35 20 300)"/>
+
+<ellipse cx="220" cy="300" rx="32" ry="95"
+fill="#A86C44"
+transform="rotate(-35 220 300)"/>
+
+</g>
+
+<!-- hearts -->
+<text x="200" y="150" font-size="55">💛</text>
+<text x="570" y="190" font-size="45">💛</text>
+
+</svg>
+`
+},
+
+
+{
+sentence:
+"It was a beautiful day.",
+
+html:
+`It <span class="grammar">was</span> a beautiful day.`,
+
+image:
+`
+<svg viewBox="0 0 800 500">
+
+<!-- SKY -->
+<defs>
+
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#A8E2FF"/>
+<stop offset="100%" stop-color="#E9F8FF"/>
+</linearGradient>
+
+</defs>
+
+<rect width="800" height="500" fill="url(#sky)"/>
+
+<!-- SUN -->
+<circle cx="660" cy="90" r="55" fill="#FFD85A"/>
+
+<!-- CLOUDS -->
+<g fill="white">
+<circle cx="130" cy="95" r="35"/>
+<circle cx="175" cy="80" r="50"/>
+<circle cx="225" cy="100" r="35"/>
+</g>
+
+<!-- HILLS -->
+<path d="M0 360 Q150 250 310 360 T620 350 T800 330 L800 500 L0 500Z"
+fill="#8ECF72"/>
+
+<path d="M0 410 Q180 320 350 410 T700 390 T800 390 L800 500 L0 500Z"
+fill="#A8DF83"/>
+
+<!-- PATH -->
+<path d="M340 500 Q390 430 430 370 Q470 330 510 315"
+stroke="#E8D1A6"
+stroke-width="70"
+fill="none"
+stroke-linecap="round"/>
+
+<!-- TREES -->
+<g transform="translate(80 245)">
+<rect x="35" y="70" width="28" height="110" fill="#8B5B3D"/>
+<circle cx="50" cy="55" r="58" fill="#62B55A"/>
+</g>
+
+<g transform="translate(650 265)">
+<rect x="35" y="70" width="28" height="110" fill="#8B5B3D"/>
+<circle cx="50" cy="55" r="58" fill="#62B55A"/>
+</g>
+
+<!-- BEN SMALL -->
+<g transform="translate(500 310) scale(.55)">
+<circle cx="40" cy="40" r="28" fill="#A96E45"/>
+<circle cx="140" cy="40" r="28" fill="#A96E45"/>
+<circle cx="90" cy="90" r="70" fill="#A96E45"/>
+<ellipse cx="90" cy="210" rx="65" ry="85" fill="#A96E45"/>
+<circle cx="67" cy="80" r="6"/>
+<circle cx="113" cy="80" r="6"/>
+<ellipse cx="90" cy="105" rx="35" ry="27" fill="#D5A37A"/>
+<path d="M70 110 Q90 130 110 110" stroke="#333" stroke-width="5" fill="none"/>
+</g>
+
+<!-- FLOWERS -->
+<g font-size="25">
+<text x="80" y="440">🌼</text>
+<text x="140" y="400">🌸</text>
+<text x="220" y="455">🌼</text>
+<text x="610" y="430">🌸</text>
+<text x="700" y="455">🌼</text>
+</g>
+
+<!-- BIRDS -->
+<path d="M350 120 Q365 105 380 120 Q395 105 410 120"
+stroke="#555"
+stroke-width="5"
+fill="none"/>
+
+<path d="M470 150 Q485 135 500 150 Q515 135 530 150"
+stroke="#555"
+stroke-width="5"
+fill="none"/>
+
+</svg>
+`
+}
+
+];
+
+
+/* =========================================================
+   BOOK FUNCTIONS
+========================================================= */
+
+let currentPage = 0;
+
+const sentenceElement =
+    document.getElementById("sentence");
+
+const pictureFrame =
+    document.getElementById("pictureFrame");
+
+const pageCounter =
+    document.getElementById("pageCounter");
+
+const backButton =
+    document.getElementById("backButton");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const dotsContainer =
+    document.getElementById("dots");
+
+
+function createDots() {
+
+    dotsContainer.innerHTML = "";
+
+    pages.forEach((page,index) => {
+
+        const dot =
+            document.createElement("div");
+
+        dot.className = "dot";
+
+        if(index === currentPage) {
+            dot.classList.add("active");
+        }
+
+        dotsContainer.appendChild(dot);
+
+    });
+
+}
+
+
+function updateBook() {
+
+    /* stop speech when changing pages */
+
+    window.speechSynthesis.cancel();
+
+    sentenceElement.classList.remove("speaking");
+
+
+    /* recreate animation */
+
+    const pageContent =
+        document.getElementById("pageContent");
+
+    pageContent.style.animation = "none";
+
+    void pageContent.offsetWidth;
+
+    pageContent.style.animation =
+        "pageIn .35s ease";
+
+
+    /* change image */
+
+    pictureFrame.innerHTML =
+        pages[currentPage].image;
+
+
+    /* change sentence */
+
+    sentenceElement.innerHTML =
+        pages[currentPage].html;
+
+
+    /* page number */
+
+    pageCounter.textContent =
+        "Page " +
+        (currentPage + 1) +
+        " / " +
+        pages.length;
+
+
+    /* buttons */
+
+    backButton.disabled =
+        currentPage === 0;
+
+
+    if(currentPage === pages.length - 1) {
+
+        nextButton.innerHTML =
+            "Grammar Time ⭐";
+
+    } else {
+
+        nextButton.innerHTML =
+            "Next →";
+
+    }
+
+
+    createDots();
+
+}
+
+
+function nextPage() {
+
+    if(currentPage < pages.length - 1) {
+
+        currentPage++;
+
+        updateBook();
+
+    } else {
+
+        showGrammar();
+
+    }
+
+}
+
+
+function previousPage() {
+
+    if(currentPage > 0) {
+
+        currentPage--;
+
+        updateBook();
+
+    }
+
+}
+
+
+/* =========================================================
+   TEXT TO SPEECH
+========================================================= */
+
+function speakSentence() {
+
+    window.speechSynthesis.cancel();
+
+    const text =
+        pages[currentPage].sentence;
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+
+    /* English voice */
+
+    utterance.lang = "en-US";
+
+    /*
+       Slightly slower than normal
+       so young learners can hear
+       each word clearly.
+    */
+
+    utterance.rate = 0.82;
+
+    utterance.pitch = 1.05;
+
+    utterance.volume = 1;
+
+
+    /* Try to find a good English voice */
+
+    const voices =
+        window.speechSynthesis.getVoices();
+
+    const preferredVoice =
+        voices.find(voice =>
+            voice.lang === "en-US" &&
+            (
+                voice.name.includes("Samantha") ||
+                voice.name.includes("Google") ||
+                voice.name.includes("Microsoft") ||
+                voice.name.includes("Natural")
+            )
+        )
+        ||
+        voices.find(voice =>
+            voice.lang.startsWith("en-US")
+        )
+        ||
+        voices.find(voice =>
+            voice.lang.startsWith("en")
+        );
+
+
+    if(preferredVoice) {
+
+        utterance.voice =
+            preferredVoice;
+
+    }
+
+
+    sentenceElement.classList.add("speaking");
+
+
+    utterance.onend = function() {
+
+        sentenceElement.classList.remove("speaking");
+
+    };
+
+
+    utterance.onerror = function() {
+
+        sentenceElement.classList.remove("speaking");
+
+    };
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/*
+   Some browsers load voices
+   a little later.
+*/
+
+window.speechSynthesis.onvoiceschanged =
+function() {
+
+    window.speechSynthesis.getVoices();
+
+};
+
+
+/* =========================================================
+   GRAMMAR
+========================================================= */
+
+function showGrammar() {
+
+    window.speechSynthesis.cancel();
+
+    document
+        .getElementById("storybook")
+        .style.display = "none";
+
+
+    document
+        .getElementById("grammarPage")
+        .classList.add("show");
+
+
+    pageCounter.textContent =
+        "Grammar Time ⭐";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+const quizQuestions = [
+
+{
+question:
+"🐶 The dog ___ sleepy yesterday.",
+answer:
+"was"
+},
+
+{
+question:
+"👧 Mia ___ at school.",
+answer:
+"was"
+},
+
+{
+question:
+"🐦🐦 The birds ___ in the tree.",
+answer:
+"were"
+},
+
+{
+question:
+"🐱🐱 The cats ___ hungry.",
+answer:
+"were"
+},
+
+{
+question:
+"☀️ It ___ sunny yesterday.",
+answer:
+"was"
+},
+
+{
+question:
+"👧👦 We ___ excited.",
+answer:
+"were"
+}
+
+];
+
+
+let quizIndex = 0;
+
+let quizLocked = false;
+
+
+function startQuiz() {
+
+    document
+        .getElementById("grammarPage")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("quizPage")
+        .classList.add("show");
+
+
+    pageCounter.textContent =
+        "Mini Game 🎯";
+
+
+    loadQuiz();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function loadQuiz() {
+
+    quizLocked = false;
+
+
+    document
+        .getElementById("quizNumber")
+        .textContent =
+        "Question " +
+        (quizIndex + 1) +
+        " of " +
+        quizQuestions.length;
+
+
+    document
+        .getElementById("quizQuestion")
+        .innerHTML =
+        quizQuestions[quizIndex].question;
+
+
+    document
+        .getElementById("feedback")
+        .textContent = "";
+
+
+    const buttons =
+        document.querySelectorAll(".quiz-btn");
+
+
+    buttons.forEach(button => {
+
+        button.disabled = false;
+
+        button.classList.remove(
+            "correct",
+            "wrong"
+        );
+
+    });
+
+}
+
+
+function answerQuiz(choice,button) {
+
+    if(quizLocked) return;
+
+    quizLocked = true;
+
+
+    const correct =
+        quizQuestions[quizIndex].answer;
+
+
+    const feedback =
+        document.getElementById("feedback");
+
+
+    const buttons =
+        document.querySelectorAll(".quiz-btn");
+
+
+    if(choice === correct) {
+
+        button.classList.add("correct");
+
+        feedback.textContent =
+            "🎉 Great job!";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        buttons.forEach(btn => {
+
+            if(
+                btn.textContent.trim()
+                === correct
+            ) {
+
+                btn.classList.add(
+                    "correct"
+                );
+
+            }
+
+        });
+
+        feedback.textContent =
+            "💡 Almost! The answer is "
+            + correct + ".";
+
+    }
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+    });
+
+
+    setTimeout(function() {
+
+        quizIndex++;
+
+        if(
+            quizIndex <
+            quizQuestions.length
+        ) {
+
+            loadQuiz();
+
+        } else {
+
+            finishQuiz();
+
+        }
+
+    },1400);
+
+}
+
+
+function finishQuiz() {
+
+    document
+        .getElementById("quizContent")
+        .style.display = "none";
+
+
+    document
+        .getElementById("finish")
+        .classList.add("show");
+
+
+    pageCounter.textContent =
+        "Finished! ⭐";
+
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartBook() {
+
+    currentPage = 0;
+
+    quizIndex = 0;
+
+    quizLocked = false;
+
+
+    document
+        .getElementById("finish")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("quizContent")
+        .style.display = "block";
+
+
+    document
+        .getElementById("quizPage")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("grammarPage")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("storybook")
+        .style.display = "block";
+
+
+    updateBook();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+updateBook();
+
+</script>
+
+</body>
+</html>
